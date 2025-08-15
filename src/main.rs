@@ -174,13 +174,16 @@ fn main() {
     }
 
     println!("Start sync -------------------");
-    let mut error1: hip_bindings::hipError_t = 99;
+    let mut error1: hip_bindings::hipError_t = 9999;
     let start7 = Instant::now();
     unsafe {
         error1 = hipDeviceSynchronize();
     }
     let duration7= start7.elapsed();
     println!("hipSyncError: {:?}", error1);
+    if error1 != 0 {
+        return;
+    }
     println!("End sync -------------------");
     println!("Start get results -------------------");
     println!("End get results -------------------");
